@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>Quiz</title>
+<style>
+body { font-family: Arial; max-width: 800px; margin: 40px auto; }
+.card { border: 1px solid #ddd; padding: 15px; margin: 20px 0; border-radius: 10px; }
+.ok { color: green; font-weight: bold; }
+.bad { color: crimson; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h1>Quiz do nauki</h1>
+
+<div class="card" data-correct="B">
+<h3>1) 2 + 2 = ?</h3>
+<label><input type="radio" name="q1" value="A"> 3</label><br>
+<label><input type="radio" name="q1" value="B"> 4</label><br>
+<label><input type="radio" name="q1" value="C"> 5</label>
+<p class="feedback"></p>
+</div>
+
+<div class="card" data-correct="C">
+<h3>2) Który typ w Pythonie jest niemutowalny?</h3>
+<label><input type="radio" name="q2" value="A"> list</label><br>
+<label><input type="radio" name="q2" value="B"> dict</label><br>
+<label><input type="radio" name="q2" value="C"> tuple</label>
+<p class="feedback"></p>
+</div>
+
+<script>
+document.querySelectorAll(".card").forEach(card => {
+  card.querySelectorAll("input").forEach(radio => {
+    radio.addEventListener("change", () => {
+      const correct = card.dataset.correct;
+      const feedback = card.querySelector(".feedback");
+
+      if (radio.value === correct) {
+        feedback.textContent = "✅ Dobrze!";
+        feedback.className = "feedback ok";
+      } else {
+        feedback.textContent = "❌ Źle — poprawna: " + correct;
+        feedback.className = "feedback bad";
+      }
+    });
+  });
+});
+</script>
+
+</body>
+</html>
